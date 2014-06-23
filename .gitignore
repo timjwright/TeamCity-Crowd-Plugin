@@ -13,3 +13,5 @@ out/
 *.iws
 teamcitydist/
 *.tar.gz
+
+.idea
