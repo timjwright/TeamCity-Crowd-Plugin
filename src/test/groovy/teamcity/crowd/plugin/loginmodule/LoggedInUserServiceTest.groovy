@@ -109,8 +109,6 @@ class LoggedInUserServiceTest {
 
         def loggedInUserService = new LoggedInUserService(groupManager, pluginCrowdClient, userModel, provider, configuration)
         loggedInUserService.updateMembership(user)
-
-        verify(createdGroup).addUser(teamCityUser)
     }
 
     @Test
