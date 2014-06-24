@@ -85,10 +85,13 @@ public class LoggedInUserService {
             if (!allTeamCityGroupsUserIsAMemberOfAlready.contains(userGroup)) {
                 SUserGroup teamCityGroup = userGroupManager.findUserGroupByName(userGroup);
                 if (teamCityGroup == null && shouldCreateGroups) {
-                    teamCityGroup = userGroupManager.createUserGroup(
-                            groupNameToGroupKey.transform(userGroup),
-                            userGroup,
-                            CREATED_BY_PLUGIN_MESSAGE);
+                    Optional<String> groupKey = groupNameToGroupKey.transform(userGroup);
+                    if ( groupKey.isPresent() ) {
+                        teamCityGroup = userGroupManager.createUserGroup(
+                                groupKey.get(),
+                                userGroup,
+                                CREATED_BY_PLUGIN_MESSAGE);
+                    }
                 }
                 if (teamCityGroup != null) {
                     teamCityGroup.addUser(teamCityUser);
